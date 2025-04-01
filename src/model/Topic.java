@@ -3,30 +3,26 @@ package model;
 import java.time.LocalDate;
 
 public class Topic {
-    private String nome;
-    private int horasEstimadas;
-    private LocalDate deadline;
-    private boolean concluido;
+    private String name;
+    private int hoursEstimated;
+    private LocalDate deadLine;
+    private boolean concluded;
 
-    public Topic(String nome, int horasEstimadas, LocalDate deadline) {
-        this.nome = nome;
-        this.horasEstimadas = horasEstimadas;
-        this.deadline = deadline;
-        this.concluido = false;
+    public Topic(String name, int hoursEstimated, LocalDate deadLine)
+    {
+        this.name = name;
+        this.hoursEstimated = hoursEstimated;
+        this.deadLine = deadLine;
+        this.concluded = false;
     }
 
-    // Getters e Setters
-    public String getNome() { return nome; }
-    public void setNome(String nome) { this.nome = nome; }
-    public int getHorasEstimadas() { return horasEstimadas; }
-    public void setHorasEstimadas(int horasEstimadas) { this.horasEstimadas = horasEstimadas; }
-    public LocalDate getDeadline() { return deadline; }
-    public void setDeadline(LocalDate deadline) { this.deadline = deadline; }
-    public boolean isConcluido() { return concluido; }
-    public void setConcluido(boolean concluido) { this.concluido = concluido; }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+    public int getHoursEstimated() { return hoursEstimated; }
+    public void setHoursEstimated(int hoursEstimated) { this.hoursEstimated = hoursEstimated; }
+    public LocalDate getDeadline() { return deadLine; }
+    public void setDeadline(LocalDate deadLine) { this.deadLine = deadLine; }
+    public boolean isConcluded() { return concluded; }
+    public void setConcluido(boolean concluded) { this.concluded = concluded; }
 
-    @Override
-    public String toString() {
-        return nome + " - " + horasEstimadas + "h (" + (concluido ? "Concluído" : "Pendente") + ")";
-    }
 }

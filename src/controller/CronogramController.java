@@ -2,46 +2,39 @@ package controller;
 
 import dao.MateriaDAO;
 import model.Materia;
+
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
 public class CronogramController {
-    private MateriaDAO materiaDAO;
+    private final MateriaDAO materiaDAO;
 
-    public CronogramController() {
-        this.materiaDAO = new MateriaDAO();
+    public CronogramController(Connection connection)
+    {
+        this.materiaDAO = new MateriaDAO(connection);
+    }
+
+    public void initDatabase() throws SQLException {
+        materiaDAO.createTables();
     }
 
     public void salvarMateria(Materia materia) throws SQLException {
-        materiaDAO.salvarMateria(materia);
-    }
-
-    public void atualizarMateria(Materia materia) throws SQLException {
-        materiaDAO.salvarMateria(materia);
-    }
-
-    public void removerMateria(int id) throws SQLException {
-        Materia materia = buscarMateriaPorId(id);
-        if (materia != null) {
-            materiaDAO.removerMateria(materia); // Chama o método atualizado
-        }
+        materiaDAO.saveSubject(materia);
     }
 
     public List<Materia> listarTodasMaterias() throws SQLException {
-        return materiaDAO.carregarTodasMaterias();
+        return materiaDAO.loadAllSubjects();
     }
 
     public Materia buscarMateriaPorId(int id) throws SQLException {
-        List<Materia> materias = materiaDAO.carregarTodasMaterias();
-        for (Materia m : materias) {
-            if (m.getId() == id) {
-                return m;
-            }
-        }
-        return null;
+        return materiaDAO.loadAllSubjects().stream()
+                .filter(m -> m.getId() == id)
+                .findFirst()
+                .orElse(null);
     }
 
-    public void close() {
-        materiaDAO.close();
+    public void removerMateria(int id) throws SQLException {
+        materiaDAO.deleteSubject(id);
     }
 }
